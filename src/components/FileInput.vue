@@ -1,56 +1,45 @@
 <template>
-  <div>
-    <template v-if="files.length == 0">
-      <h2>Add an app to get started</h2>
-      <h5>You can drag files with the .aab extension or click to add one</h5>
-      <file-upload
-        accept=".aab"
-        extensions=".aab"
-        :drop="true"
-        :value="files"
-        @input="updatetValue"
-        @input-filter="inputFilter"
-      >
-        Upload file
-      </file-upload>
-    </template>
-    <template v-else>
-      <div>
-        <p>{{ files[0].name }}</p>
-        <p>{{ files[0].size | formatSize }}</p>
-        <p>{{ files[0].lastModified }}</p>
-      </div>
-    </template>
+  <div
+    id="holder"
+    v-on:drop="onFileDrop"
+    v-on:dragover="onFileDragOver"
+    v-if="file == null"
+  >
+    <h2>Add an app to get started</h2>
+    <h5>You can drag files with the .aab extension or click to add one</h5>
+  </div>
+  <div v-else>
+    <h2>{{ file.name }}</h2>
+    <h5>
+      <span>{{ file.size | formatSize }} · {{ file.lastModifiedDate }}</span>
+    </h5>
+    <hr />
   </div>
 </template>
 
 <script>
-import VueUploadComponent from 'vue-upload-component'
-
 export default {
   name: 'FileInput',
-  components: {
-    'file-upload': VueUploadComponent,
-  },
   data() {
     return {
-      files: [],
+      file: null,
     }
   },
   methods: {
-    updatetValue(value) {
-      this.files = value
-    },
-    inputFilter(newFile, oldFile, prevent) {
-      if (newFile && !oldFile) {
-        // Add file
+    onFileDrop: function(e) {
+      e.preventDefault()
+      e.stopPropagation()
 
-        // Filter non-image file
-        // Will not be added to files
-        if (!/\.(aab)$/i.test(newFile.name)) {
-          return prevent()
-        }
+      if (e.dataTransfer.files.length > 1) {
+        console.log('Error: We can only take 1 file. Taking the first file')
       }
+
+      this.file = e.dataTransfer.files[0]
+      console.log('File(s) you dropped here: ', this.file)
+    },
+    onFileDragOver: (e) => {
+      e.preventDefault()
+      e.stopPropagation()
     },
   },
 }
