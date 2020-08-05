@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="bg-gray-100 h-screen">
-    <div class="flex justify-center my-4">
+  <div id="app" class="bg-gray-100 h-screen flex items-center flex-col">
+    <div class="my-4">
       <img alt="Vue logo" src="./assets/logo.png" width="80" />
     </div>
     <FileInput />
