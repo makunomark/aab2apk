@@ -3,7 +3,7 @@
     id="holder"
     v-on:drop="onFileDrop"
     v-on:dragover="onFileDragOver"
-    v-if="file == null"
+    v-if="file.file == null"
     class="bg-gray-200 p-8 rounded-lg mx-8 max-w-md"
   >
     <h2 class="text-center text-xl mb-2">Add an app to get started</h2>
@@ -26,21 +26,26 @@
       class="cursor-pointer self-end"
       v-on:click="clearFile"
     />
-    <h2 class="flex-1">{{ file.name }}</h2>
+    <h2 class="flex-1">{{ file.file.name }}</h2>
     <h5 class="text-gray-600 text-sm mt-2">
-      {{ file.size | formatSize }} · {{ file.lastModifiedDate }}
+      {{ file.file.size | formatSize }} · {{ file.file.lastModifiedDate }}
     </h5>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import store from '@/store'
+
 export default {
   name: 'FileInput',
   data() {
     return {
-      file: null,
       fileNotAab: false,
     }
+  },
+  computed: {
+    ...mapState(['file']),
   },
   methods: {
     onFileDrop: function(e) {
@@ -51,12 +56,12 @@ export default {
         console.log('Error: We can only take 1 file. Taking the first file')
       }
 
-      this.file = e.dataTransfer.files[0]
-      if (!/\.(aab)$/i.test(this.file.name)) {
+      const file = e.dataTransfer.files[0]
+      if (!/\.(aab)$/i.test(file.name)) {
         this.showFileNotAabError()
         this.clearFile()
       } else {
-        console.log('File(s) you dropped here: ', this.file)
+        store.dispatch('file/addFile', file)
       }
     },
     onFileDragOver: (e) => {
@@ -64,7 +69,7 @@ export default {
       e.stopPropagation()
     },
     clearFile: function() {
-      this.file = null
+      store.dispatch('file/removeFile')
     },
     showFileNotAabError: function() {
       this.fileNotAab = true
