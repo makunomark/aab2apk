@@ -41,11 +41,11 @@ export default {
   name: 'FileInput',
   data() {
     return {
-      fileNotAab: false,
+      fileNotAab: false
     }
   },
   computed: {
-    ...mapState(['file']),
+    ...mapState(['file'])
   },
   methods: {
     onFileDrop: function(e) {
@@ -64,7 +64,7 @@ export default {
         store.dispatch('file/addFile', file)
       }
     },
-    onFileDragOver: (e) => {
+    onFileDragOver: e => {
       e.preventDefault()
       e.stopPropagation()
     },
@@ -76,7 +76,7 @@ export default {
       setTimeout(() => {
         this.fileNotAab = false
       }, 3000)
-    },
-  },
+    }
+  }
 }
 </script>
