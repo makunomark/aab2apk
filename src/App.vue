@@ -13,7 +13,7 @@ import FileInput from './components/FileInput.vue'
 export default {
   name: 'App',
   components: {
-    FileInput,
-  },
+    FileInput
+  }
 }
 </script>

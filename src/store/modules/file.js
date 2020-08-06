@@ -1,7 +1,7 @@
 export const namespaced = true
 
 export const state = {
-  file: null,
+  file: null
 }
 
 export const mutations = {
@@ -10,7 +10,7 @@ export const mutations = {
   },
   REMOVE_FILE(state) {
     state.file = null
-  },
+  }
 }
 
 export const actions = {
@@ -19,7 +19,7 @@ export const actions = {
   },
   removeFile({ commit }) {
     commit('REMOVE_FILE')
-  },
+  }
 }
 
 export const modules = {}
