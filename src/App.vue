@@ -17,6 +17,7 @@
 <script>
 import { mapState } from 'vuex'
 import { remote } from 'electron'
+import { v4 as uuidv4 } from 'uuid'
 
 import FileInput from './components/FileInput.vue'
 import { createFileInTemp } from '@/service/file.js'
@@ -38,7 +39,7 @@ export default {
   created: function() {
     const tempDirectory = remote.app.getAppPath('temp')
 
-    store.dispatch('app/createSessionId', tempDirectory)
+    store.dispatch('app/createSessionId', uuidv4())
     store.dispatch('app/createWorkingDirectory', tempDirectory)
   },
   methods: {

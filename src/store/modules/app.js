@@ -17,8 +17,8 @@ export const mutations = {
 }
 
 export const actions = {
-  createSessionId({ commit }) {
-    commit('CREATE_SESSION_ID', '66a03da4-f100-4199-88a5-d53d80f7481c')
+  createSessionId({ commit }, sessionId) {
+    commit('CREATE_SESSION_ID', sessionId)
   },
   createWorkingDirectory({ commit, state }, tempDirectory) {
     const destinationDirectory = path.join(
