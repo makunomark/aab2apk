@@ -3,15 +3,7 @@
     <div class="my-4">
       <img alt="Vue logo" src="./assets/logo.png" width="80" />
     </div>
-
-    <template v-if="app.bundletoolExists">
-      <FileInput />
-    </template>
-
-    <template v-else>
-      <BundleToolDownloader />
-    </template>
-
+    <FileInput />
     <button
       v-if="file.file"
       v-on:click="createCopy"
@@ -27,17 +19,14 @@ import { mapState } from 'vuex'
 import { remote } from 'electron'
 import { v4 as uuidv4 } from 'uuid'
 
-import FileInput from '@/components/FileInput.vue'
-import BundleToolDownloader from '@/components/BundleToolDownloader.vue'
-
+import FileInput from './components/FileInput.vue'
 import { createFileInTemp } from '@/service/file.js'
 import store from '@/store'
 
 export default {
   name: 'App',
   components: {
-    FileInput,
-    BundleToolDownloader
+    FileInput
   },
   data() {
     return {
@@ -52,7 +41,6 @@ export default {
 
     store.dispatch('app/createSessionId', uuidv4())
     store.dispatch('app/createWorkingDirectory', tempDirectory)
-    store.dispatch('app/createBundletoolPath', tempDirectory)
   },
   methods: {
     createCopy: function() {
