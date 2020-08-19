@@ -15,7 +15,10 @@
       <BundleToolDownloader />
     </template>
 
-    <div v-if="file.file" class="bg-white p-4 rounded-lg shadow mt-8 max-w-md">
+    <div
+      v-if="file.file"
+      class="bg-white p-4 rounded-lg shadow-sm m-8 max-w-md"
+    >
       <h2 class="mb-2 text-sm text-gray-600">
         By default the application is signed with the debug keystore located at
         /asdad/asdads/asda.jks
@@ -213,7 +216,7 @@ export default {
 
       const getAppVersion = `/Users/markgachoka/Library/Android/sdk/build-tools/28.0.3/aapt dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
 
-      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-${fileNameMinusExt}-v$(pbpaste).apk"`
+      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-v$(pbpaste).apk"`
 
       const openFinder = `open "${apksFilePath}"`
 

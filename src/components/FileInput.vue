@@ -17,7 +17,10 @@
       Error: Only .aab file types allowed
     </p>
   </div>
-  <div v-else class="bg-white p-4 rounded-lg mx-8 shadow flex flex-col">
+  <div
+    v-else
+    class="bg-white p-4 rounded-lg mx-8 shadow-sm flex flex-col max-w-md"
+  >
     <img
       alt="Vue logo"
       src="../assets/close.png"
