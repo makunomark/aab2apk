@@ -214,7 +214,17 @@ export default {
 
       const universalApkPath = path.join(apksFilePath, 'universal.apk')
 
-      const getAppVersion = `/Users/markgachoka/Library/Android/sdk/build-tools/28.0.3/aapt dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
+      const defaultAaptPath = path.join(
+        remote.app.getPath('home'),
+        'Library',
+        'Android',
+        'sdk',
+        'build-tools',
+        '30.0.0',
+        'aapt'
+      )
+
+      const getAppVersion = `${defaultAaptPath} dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
 
       const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-v$(pbpaste).apk"`
 
