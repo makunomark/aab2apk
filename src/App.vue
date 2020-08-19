@@ -15,7 +15,10 @@
       <BundleToolDownloader />
     </template>
 
-    <div v-if="file.file" class="bg-white p-4 rounded-lg shadow mt-8 max-w-md">
+    <div
+      v-if="file.file"
+      class="bg-white p-4 rounded-lg shadow-sm m-8 max-w-md"
+    >
       <h2 class="mb-2 text-sm text-gray-600">
         By default the application is signed with the debug keystore located at
         /asdad/asdads/asda.jks
@@ -211,9 +214,19 @@ export default {
 
       const universalApkPath = path.join(apksFilePath, 'universal.apk')
 
-      const getAppVersion = `/Users/markgachoka/Library/Android/sdk/build-tools/28.0.3/aapt dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
+      const defaultAaptPath = path.join(
+        remote.app.getPath('home'),
+        'Library',
+        'Android',
+        'sdk',
+        'build-tools',
+        '30.0.0',
+        'aapt'
+      )
 
-      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-$(pbpaste).apk"`
+      const getAppVersion = `${defaultAaptPath} dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
+
+      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-v$(pbpaste).apk"`
 
       const openFinder = `open "${apksFilePath}"`
 
