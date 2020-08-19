@@ -213,7 +213,7 @@ export default {
 
       const getAppVersion = `/Users/markgachoka/Library/Android/sdk/build-tools/28.0.3/aapt dump badging "${universalApkPath}" | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//" | pbcopy`
 
-      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-$(pbpaste).apk"`
+      const renameFile = `mv "${universalApkPath}" "${apksFilePath}/${fileNameMinusExt}-${fileNameMinusExt}-v$(pbpaste).apk"`
 
       const openFinder = `open "${apksFilePath}"`
 
