@@ -1,4 +1,10 @@
 <template>
+  <!-- 
+  A component that allows the user to:
+    1. download the bundle tool
+    2. Drag and drop the downloaded .jar file into it
+    3. Store a copy of the file 
+  -->
   <div
     class="my-8 py-8 flex flex-col justify-center bg-gray-200 p-8 rounded-lg mx-8 max-w-md"
   >
@@ -62,7 +68,7 @@ import store from '@/store'
 import { createFileInTemp } from '@/service/file.js'
 
 export default {
-  name: 'BundleToolDownloader',
+  name: 'BundleToolComponent',
   data() {
     return {
       downloadBundletoolStarted: false,

@@ -1,4 +1,13 @@
 <template>
+  <!-- 
+  A component that allows the user to:
+    1. drag and drop the aab file
+    2. check if the file type is an aab
+    3. send the file to the store
+    4. show file details
+    5. remove the selected file 
+  -->
+
   <div
     id="holder"
     v-on:drop="onFileDrop"
@@ -41,7 +50,7 @@ import { mapState } from 'vuex'
 import store from '@/store'
 
 export default {
-  name: 'FileInput',
+  name: 'FileInputComponent',
   data() {
     return {
       fileNotAab: false
